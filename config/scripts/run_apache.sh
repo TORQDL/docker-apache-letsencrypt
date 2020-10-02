@@ -17,6 +17,29 @@ if [ -f /var/run/apache2/apache2.pid ]; then
       else
         echo "The pid-file is belonging to an apache-process, so it will stay alive."
     fi
+
+    # Enable Existing Apache Sites
+    for file in "/etc/apache2/sites-available"; do
+        if [ -f "$file" ]; then
+            echo "Processing $file ..."
+            # Get filename without path
+            fullfilename="$file"
+            filename=$(basename "$fullfilename")
+            # Get filename without extension
+            fname="${filename%.*}"
+            # Get file extension
+            ext="${filename##*.}"
+            # Check that file is a .conf
+            if [ "$ext" == "conf" ]; then
+                # Make sure the file isn't one of the defaults, which shouldn't even exist anyway, since the
+                # sites-available directory should be a volume, which means only what we add should be present.
+                if [ "$fname" != "000-default" && "$fname" != "default-ssl"]; then
+                    # Enable the site
+                    bash -c "a2ensite $fname"
+                fi
+            fi
+        fi
+    done
 fi
 
 exec /usr/sbin/apache2 -D FOREGROUND
