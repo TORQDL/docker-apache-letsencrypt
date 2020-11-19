@@ -1,9 +1,9 @@
 FROM phusion/baseimage:bionic-1.0.0
-LABEL com.medtronic.mitg.docker.mitgwebdevcontainer.title="Docker Apache with Let’s Encrypt" \
-      com.medtronic.mitg.docker.mitgwebdevcontainer.description="Debian based Apache web server with Let’s Encrypt automatic certificate enrollment." \
-      com.medtronic.mitg.docker.mitgwebdevcontainer.version="0.0.1" \
-      com.medtronic.mitg.docker.mitgwebdevcontainer.author="BirgerK <birger.kamp@gmail.com>" \
-      com.medtronic.mitg.docker.mitgwebdevcontainer.maintainer="Ty Baldwin <ty@torqdl.com>"
+LABEL com.torqdl.docker.apachessl.title="Apache Reverse Proxy with Let’s Encrypt" \
+      com.torqdl.docker.apachessl.description="Debian based Apache web server with reverse proxy and Let’s Encrypt automatic certificate enrollment." \
+      com.torqdl.docker.apachessl.version="0.0.2" \
+      com.torqdl.docker.apachessl.author="BirgerK <birger.kamp@gmail.com>" \
+      com.torqdl.docker.apachessl.maintainer="Ty Baldwin <ty@torqdl.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LETSENCRYPT_HOME /etc/letsencrypt
