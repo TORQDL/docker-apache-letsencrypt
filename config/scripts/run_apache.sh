@@ -18,6 +18,9 @@ if [ -f /var/run/apache2/apache2.pid ]; then
         echo "The pid-file is belonging to an apache-process, so it will stay alive."
     fi
 
+    # Disable default Apache site
+    bash -c "a2dissite 000-default default-ssl"
+
     # Enable Existing Apache Sites
     for file in "/etc/apache2/sites-available"; do
         if [ -f "$file" ]; then
