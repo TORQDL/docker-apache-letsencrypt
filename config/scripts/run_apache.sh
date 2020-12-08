@@ -33,6 +33,7 @@ if [ -f /var/run/apache2/apache2.pid ]; then
             if [ "$ext" == "conf" ]; then
                 # Make sure the file isn't one of the defaults, which shouldn't even exist anyway, since the
                 # sites-available directory should be a volume, which means only what we add should be present.
+                # But first time container creation has the default site disabled, not removed, for troubleshooting.
                 if [ "$fname" != "000-default" && "$fname" != "default-ssl"]; then
                     # Enable the site
                     bash -c "a2ensite $fname"
